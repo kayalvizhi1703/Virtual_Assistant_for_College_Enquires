@@ -203,7 +203,7 @@ export default function ExplorePage() {
                     { icon: Clock, label: 'Duration', value: selectedCourseData.duration },
                     { icon: IndianRupee, label: 'Annual Fee', value: `Rs. ${selectedCourseData.fee_annual.toLocaleString()}` },
                     { icon: IndianRupee, label: 'Total Fee', value: `Rs. ${selectedCourseData.fee_total.toLocaleString()}` },
-                    { icon: Users, label: 'Intake', value: `${selectedCourseData.intake} seats` },
+                    { icon: Users, label: 'Total Seats', value: `${selectedCourseData.intake}` },
                   ].map((item) => (
                     <div key={item.label} className="glass-card p-3">
                       <item.icon className="w-4 h-4 text-blue-600 dark:text-blue-400 mb-1" />
@@ -211,6 +211,38 @@ export default function ExplorePage() {
                       <div className="text-sm font-semibold text-gray-900 dark:text-white">{item.value}</div>
                     </div>
                   ))}
+                </div>
+
+                {/* Seat availability */}
+                <div className="glass-card p-4">
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="text-sm font-semibold text-gray-900 dark:text-white flex items-center gap-2">
+                      <Users className="w-4 h-4 text-blue-500" /> Seat Availability
+                    </h3>
+                  </div>
+                  <div className="grid grid-cols-3 gap-3 text-center">
+                    <div>
+                      <div className="text-2xl font-bold text-gray-900 dark:text-white">{selectedCourseData.intake}</div>
+                      <div className="text-xs text-gray-500">Total Seats</div>
+                    </div>
+                    <div>
+                      <div className="text-2xl font-bold text-amber-600 dark:text-amber-400">{selectedCourseData.filled_seats}</div>
+                      <div className="text-xs text-gray-500">Filled</div>
+                    </div>
+                    <div>
+                      <div className="text-2xl font-bold text-green-600 dark:text-green-400">{selectedCourseData.intake - selectedCourseData.filled_seats}</div>
+                      <div className="text-xs text-gray-500">Available</div>
+                    </div>
+                  </div>
+                  <div className="mt-3 h-2 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-gradient-to-r from-amber-500 to-amber-600 rounded-full"
+                      style={{ width: `${selectedCourseData.intake > 0 ? (selectedCourseData.filled_seats / selectedCourseData.intake) * 100 : 0}%` }}
+                    />
+                  </div>
+                  <p className="text-xs text-gray-400 mt-1 text-right">
+                    {selectedCourseData.intake > 0 ? Math.round((selectedCourseData.filled_seats / selectedCourseData.intake) * 100) : 0}% filled
+                  </p>
                 </div>
 
                 {/* Eligibility */}

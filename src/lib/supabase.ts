@@ -25,6 +25,7 @@ export type Course = {
   description: string;
   subjects: string;
   intake: number;
+  filled_seats: number;
 };
 
 export type Department = {

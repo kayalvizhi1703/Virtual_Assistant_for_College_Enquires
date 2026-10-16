@@ -27,6 +27,7 @@ export default function AdminCourses() {
         { name: 'description', label: 'Description', type: 'textarea' },
         { name: 'subjects', label: 'Subjects', type: 'textarea' },
         { name: 'intake', label: 'Intake (seats)', type: 'number' },
+        { name: 'filled_seats', label: 'Filled Seats', type: 'number' },
       ],
     }} />
   );
